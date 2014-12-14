@@ -6,18 +6,18 @@
 //
 //
 
-#import "ConnectionsViewController.h"
+#import "LandingViewController.h"
 #import "MPCFSessionContainer.h"
 #import "AppDelegate.h"
 
-@interface ConnectionsViewController ()
+@interface LandingViewController ()
 
 @property (nonatomic, weak) MPCFSessionContainer *mpcfSessionContainer;
 @property (nonatomic, strong) NSMutableArray *arrConnectedDevices;
 
 @end
 
-@implementation ConnectionsViewController
+@implementation LandingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,58 +27,15 @@
     _mpcfSessionContainer = [delegate mpcfSessionContainer];
     
     _arrConnectedDevices = [[NSMutableArray alloc] init];
+    
     [_tblConnected setDataSource:self];
+    [_tblConnected setDelegate:self];
+    [_tblConnected setAllowsMultipleSelection:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(peerDidChangeStateWithNotification:)
                                                  name:@"MPCFDidChangeStateNotification"
                                                object:nil];
-    
-    ///////////////////////////////////////////////////////
-    /**
-     *  TESTING
-     *
-     *  Create and dispath methods for testing MPCF methods via GCD simulating differing wait times
-     *  for clients that appear/disappear.
-     *
-     */////////////////////////////////////////////////////
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        sleep(1);  // simulating a thread being tied up for 1 seconds
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *dict = @{@"peerID":[[MCPeerID alloc] initWithDisplayName:@"Test's iPhone"],
-                                   @"state" :[[NSNumber alloc] initWithInt:MCSessionStateConnected]};
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
-                                                                object:nil
-                                                              userInfo:dict];
-        });
-    });
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        sleep(3);  // simulating a thread being tied up for 3 seconds
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *dict = @{@"peerID":[[MCPeerID alloc] initWithDisplayName:@"Another Test's iPhone"],
-                                   @"state" :[[NSNumber alloc] initWithInt:MCSessionStateConnected]};
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
-                                                                object:nil
-                                                              userInfo:dict];
-        });
-    });
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        sleep(7);  // simulating a thread being tied up for 7 seconds
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *dict = @{@"peerID":[[MCPeerID alloc] initWithDisplayName:@"Yet Another Test's iPhone"],
-                                   @"state" :[[NSNumber alloc] initWithInt:MCSessionStateConnected]};
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
-                                                                object:nil
-                                                              userInfo:dict];
-        });
-    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -106,8 +63,8 @@
     [self presentViewController:[_mpcfSessionContainer browser] animated:YES completion:nil];
 }
 
-- (IBAction)disconnect:(id)sender {
-    [[_mpcfSessionContainer session] disconnect];
+- (IBAction)startTransaction:(id)sender {
+    
 }
 
 #pragma mark - Notifications
@@ -119,20 +76,27 @@
     MCSessionState state = [[[notification userInfo] objectForKey:@"state"] intValue];
     
     // Update UI
+    NSArray *selectedIndexes = [_tblConnected indexPathsForSelectedRows];
+    
     if (state != MCSessionStateConnecting) {
         if (state == MCSessionStateConnected) {
             [_arrConnectedDevices addObject:peerName];
         }
         else if (state == MCSessionStateNotConnected){
             if ([_arrConnectedDevices count] > 0) {
-                int index = (int)[_arrConnectedDevices indexOfObject:peerName];
+                
+                // TODO - Remember to handle devices that silently leave
+                int index = (int)[_arrConnectedDevices indexOfObjectIdenticalTo:peerName];
                 [_arrConnectedDevices removeObjectAtIndex:index];
             }
         }
     }
     
-    // HACK - Force a reload of the table whenever a change is detected
+    // HACK - Force a reload of the table whenever a change is detected but keep selections
     [_tblConnected reloadData];
+    for (NSIndexPath *path in selectedIndexes) {
+        [_tblConnected selectRowAtIndexPath:path animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
 }
 
 #pragma mark - MCBrowserViewControllerDelegate
@@ -146,7 +110,7 @@
     [[_mpcfSessionContainer browser] dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - TableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_arrConnectedDevices count];
@@ -161,6 +125,20 @@
     
     cell.textLabel.text = [_arrConnectedDevices objectAtIndex:indexPath.row];
     return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (![_btnStartTransaction isEnabled]) {
+        [_btnStartTransaction setEnabled:YES];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([[_tblConnected indexPathsForSelectedRows] count] == 0) {
+        [_btnStartTransaction setEnabled:NO];
+    }
 }
 
 @end

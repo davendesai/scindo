@@ -1,14 +1,14 @@
 //
-//  LandingController.m
+//  BackgroundController.m
 //  Scindo
 //
 //  Created by Daven Desai on 12/14/14.
 //
 //
 
-#import "LandingController.h"
+#import "BackgroundController.h"
 
-@interface LandingController ()
+@interface BackgroundController ()
 
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 
@@ -17,20 +17,20 @@
 
 @end
 
-@implementation LandingController
+@implementation BackgroundController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     // TODO - Replace later with items from plist
-    _pageIDs = @[@"SettingsView", @"ConnectionsView", @"TransactionsView"];
+    _pageIDs = @[@"SettingsView", @"LandingView", @"TransactionsView"];
     _viewControllers = @[[self.storyboard instantiateViewControllerWithIdentifier:[_pageIDs objectAtIndex:0]],
                          [self.storyboard instantiateViewControllerWithIdentifier:[_pageIDs objectAtIndex:1]],
                          [self.storyboard instantiateViewControllerWithIdentifier:[_pageIDs objectAtIndex:2]]];
         
     // Create page view controller
-    _pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageView"];
+    _pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmptyView"];
     [_pageViewController setDataSource:self];
     [_pageViewController setViewControllers:@[[_viewControllers objectAtIndex:1]]
                                   direction:UIPageViewControllerNavigationDirectionForward

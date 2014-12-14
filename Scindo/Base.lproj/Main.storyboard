@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Landing Controller-->
+        <!--Background Controller-->
         <scene sceneID="HqU-zC-mFl">
             <objects>
-                <viewController id="l41-MK-she" customClass="LandingController" sceneMemberID="viewController">
+                <viewController id="l41-MK-she" customClass="BackgroundController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="800-zt-2uB"/>
                         <viewControllerLayoutGuide type="bottom" id="E3w-wb-asK"/>
@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Landing" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lN2-li-Hlk">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Background" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lN2-li-Hlk">
                                 <rect key="frame" x="28" y="40" width="544" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -34,18 +34,18 @@
             </objects>
             <point key="canvasLocation" x="-1516" y="313"/>
         </scene>
-        <!--Page View Controller-->
+        <!--Empty Controller-->
         <scene sceneID="GhS-Jp-cpv">
             <objects>
-                <pageViewController storyboardIdentifier="PageView" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="mie-IG-SwQ" customClass="PageViewController" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="EmptyView" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="mie-IG-SwQ" customClass="EmptyController" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ge-26-frs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-754" y="313"/>
         </scene>
-        <!--Connections View Controller-->
+        <!--Landing View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="ConnectionsView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="ConnectionsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LandingView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="LandingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -60,13 +60,22 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="browseForDevices:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="C9i-EM-2j3"/>
+                                    <action selector="browseForDevices:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Yf6-Yo-N38"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I6r-Hv-T5P">
-                                <rect key="frame" x="0.0" y="90" width="600" height="510"/>
+                                <rect key="frame" x="0.0" y="90" width="600" height="432"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbz-lC-YY3">
+                                <rect key="frame" x="242" y="542" width="117" height="30"/>
+                                <state key="normal" title="Start Transaction">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startTransaction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="iNT-L0-Qth"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -75,18 +84,25 @@
                             <constraint firstItem="PAc-FB-PB1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="28" id="7I4-1e-qUh"/>
                             <constraint firstAttribute="bottom" secondItem="I6r-Hv-T5P" secondAttribute="bottom" id="Ssq-Cg-ojr"/>
                             <constraint firstAttribute="centerX" secondItem="PAc-FB-PB1" secondAttribute="centerX" id="VRS-f5-T1g"/>
+                            <constraint firstAttribute="bottom" secondItem="xbz-lC-YY3" secondAttribute="bottom" constant="28" id="WEI-V5-a09"/>
                             <constraint firstItem="I6r-Hv-T5P" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="WoV-3h-ldI"/>
+                            <constraint firstAttribute="centerX" secondItem="xbz-lC-YY3" secondAttribute="centerX" id="kaV-yy-9zy"/>
                             <constraint firstAttribute="trailing" secondItem="I6r-Hv-T5P" secondAttribute="trailing" id="mba-ck-U8n"/>
+                            <constraint firstItem="xbz-lC-YY3" firstAttribute="top" secondItem="I6r-Hv-T5P" secondAttribute="bottom" constant="20" id="mmF-TT-Pzg"/>
+                            <constraint firstItem="xbz-lC-YY3" firstAttribute="top" secondItem="I6r-Hv-T5P" secondAttribute="bottom" constant="20" id="pLV-1D-h3N"/>
                             <constraint firstItem="I6r-Hv-T5P" firstAttribute="top" secondItem="PAc-FB-PB1" secondAttribute="bottom" constant="20" id="zbS-7v-83e"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Ssq-Cg-ojr"/>
                                 <exclude reference="62F-31-wlU"/>
                                 <exclude reference="7I4-1e-qUh"/>
+                                <exclude reference="pLV-1D-h3N"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="btnStartTransaction" destination="xbz-lC-YY3" id="rIA-e7-h0A"/>
                         <outlet property="tblConnected" destination="I6r-Hv-T5P" id="JfR-Pp-IaS"/>
                     </connections>
                 </viewController>
@@ -94,10 +110,10 @@
             </objects>
             <point key="canvasLocation" x="20" y="313"/>
         </scene>
-        <!--Transactions View Controller-->
+        <!--History View Controller-->
         <scene sceneID="geV-Ee-IWg">
             <objects>
-                <viewController storyboardIdentifier="TransactionsView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zxt-JC-yto" customClass="TransactionsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionsView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zxt-JC-yto" customClass="HistoryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gCG-Ne-wJN"/>
                         <viewControllerLayoutGuide type="bottom" id="t3R-Et-kdB"/>

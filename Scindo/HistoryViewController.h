@@ -1,5 +1,5 @@
 //
-//  TransactionsViewController.h
+//  HistoryViewController.h
 //  Scindo
 //
 //  Created by Daven Desai on 12/14/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TransactionsViewController : UIViewController
+@interface HistoryViewController : UIViewController
 
 @end

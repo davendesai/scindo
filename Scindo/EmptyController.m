@@ -1,18 +1,18 @@
 //
-//  PageViewController.m
+//  EmptyController.h
 //  Scindo
 //
 //  Created by Daven Desai on 12/14/14.
 //
 //
 
-#import "PageViewController.h"
+#import "EmptyController.h"
 
-@interface PageViewController ()
+@interface EmptyController ()
 
 @end
 
-@implementation PageViewController
+@implementation EmptyController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
