@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MPCFSessionContainer.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +17,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Allocate Multipeer Connectivity Framework session at load
+    _mpcfSessionContainer = [[MPCFSessionContainer alloc] init];
+    
+    // Start advertising
+    [_mpcfSessionContainer setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
+    [_mpcfSessionContainer advertiseSelf:YES];
+    
     return YES;
 }
 

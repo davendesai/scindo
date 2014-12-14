@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "MPCFModel.h"
+#import "MPCFSessionContainer.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) MPCFSessionContainer *mpcfSessionContainer;
 
 @end
 

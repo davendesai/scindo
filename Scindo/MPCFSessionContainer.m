@@ -1,14 +1,14 @@
 //
-//  MPCFModel.m
+//  MPCFSessionContainer.m
 //  Scindo
 //
 //  Created by Daven Desai on 12/13/14.
 //
 //
 
-#import "MPCFModel.h"
+#import "MPCFSessionContainer.h"
 
-@implementation MPCFModel
+@implementation MPCFSessionContainer
 
 - (id)init {
     if (self = [super init]) {
@@ -28,6 +28,7 @@
 }
 
 - (void)setupMPCFBrowser {
+    // TODO - Create custom view for auto-accepting invites invisibly
     _browser = [[MCBrowserViewController alloc] initWithServiceType:@"scindo"
                                                                session:_session];
 }
@@ -52,7 +53,12 @@
 -(void)session:(MCSession *)session
           peer:(MCPeerID *)peerID
 didChangeState:(MCSessionState)state {
+    NSDictionary *dict = @{@"peerID": peerID,
+                           @"state" : [NSNumber numberWithInt:state]};
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
+                                                        object:nil
+                                                      userInfo:dict];
 }
 
 
