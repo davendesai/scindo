@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1303EAC91A3D939C0022BF86 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1303EAC81A3D939C0022BF86 /* HistoryViewController.m */; };
 		1303EAD61A3D975D0022BF86 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1303EAD51A3D975D0022BF86 /* SettingsViewController.m */; };
+		13200EB21A3E2B850062E598 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13200EB11A3E2B850062E598 /* RequestViewController.m */; };
 		135A7F901A3C5E940066395E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 135A7F8F1A3C5E940066395E /* main.m */; };
 		135A7F931A3C5E940066395E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 135A7F921A3C5E940066395E /* AppDelegate.m */; };
 		135A7F991A3C5E940066395E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 135A7F971A3C5E940066395E /* Main.storyboard */; };
@@ -16,7 +17,8 @@
 		135A7F9E1A3C5E940066395E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 135A7F9C1A3C5E940066395E /* LaunchScreen.xib */; };
 		135B27651A3D9A6B007D16D0 /* EmptyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 135B27641A3D9A6B007D16D0 /* EmptyController.m */; };
 		135B27681A3DA30F007D16D0 /* BackgroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 135B27671A3DA30F007D16D0 /* BackgroundController.m */; };
-		13E131EF1A3C799100F8EA9F /* LandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E131EE1A3C799100F8EA9F /* LandingViewController.m */; };
+		13BBAF0A1A3ED838008ACC57 /* TransactionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BBAF091A3ED838008ACC57 /* TransactionContainer.m */; };
+		13E131EF1A3C799100F8EA9F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E131EE1A3C799100F8EA9F /* MainViewController.m */; };
 		13E131F21A3C83C200F8EA9F /* MPCFSessionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E131F11A3C83C200F8EA9F /* MPCFSessionContainer.m */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +27,8 @@
 		1303EAC81A3D939C0022BF86 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		1303EAD41A3D975D0022BF86 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		1303EAD51A3D975D0022BF86 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		13200EB01A3E2B850062E598 /* RequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestViewController.h; sourceTree = "<group>"; };
+		13200EB11A3E2B850062E598 /* RequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestViewController.m; sourceTree = "<group>"; };
 		135A7F8A1A3C5E930066395E /* Scindo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scindo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		135A7F8E1A3C5E940066395E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		135A7F8F1A3C5E940066395E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -37,8 +41,10 @@
 		135B27641A3D9A6B007D16D0 /* EmptyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyController.m; sourceTree = "<group>"; };
 		135B27661A3DA30F007D16D0 /* BackgroundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundController.h; sourceTree = "<group>"; };
 		135B27671A3DA30F007D16D0 /* BackgroundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundController.m; sourceTree = "<group>"; };
-		13E131ED1A3C799100F8EA9F /* LandingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandingViewController.h; sourceTree = "<group>"; };
-		13E131EE1A3C799100F8EA9F /* LandingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LandingViewController.m; sourceTree = "<group>"; };
+		13BBAF081A3ED838008ACC57 /* TransactionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionContainer.h; sourceTree = "<group>"; };
+		13BBAF091A3ED838008ACC57 /* TransactionContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionContainer.m; sourceTree = "<group>"; };
+		13E131ED1A3C799100F8EA9F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		13E131EE1A3C799100F8EA9F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		13E131F01A3C83C200F8EA9F /* MPCFSessionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCFSessionContainer.h; sourceTree = "<group>"; };
 		13E131F11A3C83C200F8EA9F /* MPCFSessionContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCFSessionContainer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +63,8 @@
 		13200EAD1A3E21270062E598 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				13BBAF081A3ED838008ACC57 /* TransactionContainer.h */,
+				13BBAF091A3ED838008ACC57 /* TransactionContainer.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -64,10 +72,11 @@
 		13200EAE1A3E214C0062E598 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				13200EB71A3E36D00062E598 /* modal */,
 				1303EAC71A3D939C0022BF86 /* HistoryViewController.h */,
 				1303EAC81A3D939C0022BF86 /* HistoryViewController.m */,
-				13E131ED1A3C799100F8EA9F /* LandingViewController.h */,
-				13E131EE1A3C799100F8EA9F /* LandingViewController.m */,
+				13E131ED1A3C799100F8EA9F /* MainViewController.h */,
+				13E131EE1A3C799100F8EA9F /* MainViewController.m */,
 				1303EAD41A3D975D0022BF86 /* SettingsViewController.h */,
 				1303EAD51A3D975D0022BF86 /* SettingsViewController.m */,
 			);
@@ -81,6 +90,22 @@
 				13E131F11A3C83C200F8EA9F /* MPCFSessionContainer.m */,
 			);
 			name = network;
+			sourceTree = "<group>";
+		};
+		13200EB61A3E30C40062E598 /* anim */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = anim;
+			sourceTree = "<group>";
+		};
+		13200EB71A3E36D00062E598 /* modal */ = {
+			isa = PBXGroup;
+			children = (
+				13200EB01A3E2B850062E598 /* RequestViewController.h */,
+				13200EB11A3E2B850062E598 /* RequestViewController.m */,
+			);
+			name = modal;
 			sourceTree = "<group>";
 		};
 		135A7F811A3C5E930066395E = {
@@ -102,6 +127,7 @@
 		135A7F8C1A3C5E930066395E /* Scindo */ = {
 			isa = PBXGroup;
 			children = (
+				13200EB61A3E30C40062E598 /* anim */,
 				13200EAF1A3E23D40062E598 /* network */,
 				13200EAE1A3E214C0062E598 /* ui */,
 				13200EAD1A3E21270062E598 /* data */,
@@ -197,11 +223,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13E131EF1A3C799100F8EA9F /* LandingViewController.m in Sources */,
+				13E131EF1A3C799100F8EA9F /* MainViewController.m in Sources */,
 				135A7F931A3C5E940066395E /* AppDelegate.m in Sources */,
+				13BBAF0A1A3ED838008ACC57 /* TransactionContainer.m in Sources */,
 				135B27651A3D9A6B007D16D0 /* EmptyController.m in Sources */,
 				135A7F901A3C5E940066395E /* main.m in Sources */,
 				1303EAD61A3D975D0022BF86 /* SettingsViewController.m in Sources */,
+				13200EB21A3E2B850062E598 /* RequestViewController.m in Sources */,
 				13E131F21A3C83C200F8EA9F /* MPCFSessionContainer.m in Sources */,
 				135B27681A3DA30F007D16D0 /* BackgroundController.m in Sources */,
 				1303EAC91A3D939C0022BF86 /* HistoryViewController.m in Sources */,

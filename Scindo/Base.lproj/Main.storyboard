@@ -42,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="-754" y="313"/>
         </scene>
-        <!--Landing View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="LandingView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="LandingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LandingView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -54,61 +54,103 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAc-FB-PB1">
-                                <rect key="frame" x="224" y="40" width="152" height="30"/>
-                                <state key="normal" title="Search for Advertisers">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="browseForDevices:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Yf6-Yo-N38"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I6r-Hv-T5P">
-                                <rect key="frame" x="0.0" y="90" width="600" height="432"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbz-lC-YY3">
-                                <rect key="frame" x="242" y="542" width="117" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5VF-cv-QlD">
+                                <rect key="frame" x="242" y="550" width="117" height="30"/>
                                 <state key="normal" title="Start Transaction">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="startTransaction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="iNT-L0-Qth"/>
+                                    <segue destination="WbH-Q1-34O" kind="presentation" id="Gdf-2o-6Og"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1o8-An-ZKC">
+                                <rect key="frame" x="0.0" y="20" width="600" height="510"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PAc-FB-PB1" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="40" id="0d6-zl-Ecx"/>
-                            <constraint firstAttribute="trailing" secondItem="PAc-FB-PB1" secondAttribute="trailing" constant="28" id="62F-31-wlU"/>
-                            <constraint firstItem="PAc-FB-PB1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="28" id="7I4-1e-qUh"/>
-                            <constraint firstAttribute="bottom" secondItem="I6r-Hv-T5P" secondAttribute="bottom" id="Ssq-Cg-ojr"/>
-                            <constraint firstAttribute="centerX" secondItem="PAc-FB-PB1" secondAttribute="centerX" id="VRS-f5-T1g"/>
-                            <constraint firstAttribute="bottom" secondItem="xbz-lC-YY3" secondAttribute="bottom" constant="28" id="WEI-V5-a09"/>
-                            <constraint firstItem="I6r-Hv-T5P" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="WoV-3h-ldI"/>
-                            <constraint firstAttribute="centerX" secondItem="xbz-lC-YY3" secondAttribute="centerX" id="kaV-yy-9zy"/>
-                            <constraint firstAttribute="trailing" secondItem="I6r-Hv-T5P" secondAttribute="trailing" id="mba-ck-U8n"/>
-                            <constraint firstItem="xbz-lC-YY3" firstAttribute="top" secondItem="I6r-Hv-T5P" secondAttribute="bottom" constant="20" id="mmF-TT-Pzg"/>
-                            <constraint firstItem="xbz-lC-YY3" firstAttribute="top" secondItem="I6r-Hv-T5P" secondAttribute="bottom" constant="20" id="pLV-1D-h3N"/>
-                            <constraint firstItem="I6r-Hv-T5P" firstAttribute="top" secondItem="PAc-FB-PB1" secondAttribute="bottom" constant="20" id="zbS-7v-83e"/>
+                            <constraint firstItem="1o8-An-ZKC" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="BjF-HY-nwW"/>
+                            <constraint firstAttribute="bottom" secondItem="5VF-cv-QlD" secondAttribute="bottom" constant="20" id="Gd5-rJ-OC8"/>
+                            <constraint firstAttribute="trailing" secondItem="1o8-An-ZKC" secondAttribute="trailing" id="ber-ab-S0k"/>
+                            <constraint firstItem="1o8-An-ZKC" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="bjO-T9-3yu"/>
+                            <constraint firstItem="5VF-cv-QlD" firstAttribute="top" secondItem="1o8-An-ZKC" secondAttribute="bottom" constant="20" id="jPA-1T-9In"/>
+                            <constraint firstAttribute="centerX" secondItem="5VF-cv-QlD" secondAttribute="centerX" id="sBB-3k-qJ8"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Ssq-Cg-ojr"/>
-                                <exclude reference="62F-31-wlU"/>
-                                <exclude reference="7I4-1e-qUh"/>
-                                <exclude reference="pLV-1D-h3N"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="btnStartTransaction" destination="xbz-lC-YY3" id="rIA-e7-h0A"/>
-                        <outlet property="tblConnected" destination="I6r-Hv-T5P" id="JfR-Pp-IaS"/>
+                        <outlet property="btnStartTransaction" destination="5VF-cv-QlD" id="Q4h-aW-HCl"/>
+                        <outlet property="tblConnected" destination="1o8-An-ZKC" id="mkK-GE-g6b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="313"/>
+            <point key="canvasLocation" x="19.5" y="312.75"/>
+        </scene>
+        <!--Request View Controller-->
+        <scene sceneID="Gc3-YX-gUh">
+            <objects>
+                <viewController storyboardIdentifier="RequestView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WbH-Q1-34O" customClass="RequestViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jcO-9x-X2A"/>
+                        <viewControllerLayoutGuide type="bottom" id="pIk-tm-rX6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="RequestView" id="Fix-oG-SNR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0P-v7-xpY">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLg-j9-fgu">
+                                <rect key="frame" x="280" y="550" width="40" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="WbH-Q1-34O" eventType="touchUpInside" id="cjY-zN-kni"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="p0P-v7-xpY" secondAttribute="bottom" constant="20" id="CTo-mq-5cB"/>
+                            <constraint firstAttribute="centerX" secondItem="iLg-j9-fgu" secondAttribute="centerX" id="EgY-Y0-JpA"/>
+                            <constraint firstItem="p0P-v7-xpY" firstAttribute="leading" secondItem="Fix-oG-SNR" secondAttribute="leading" constant="177" id="Msq-7k-Cic"/>
+                            <constraint firstAttribute="trailing" secondItem="p0P-v7-xpY" secondAttribute="trailing" constant="177" id="VqE-M5-elB"/>
+                            <constraint firstAttribute="bottom" secondItem="iLg-j9-fgu" secondAttribute="bottom" constant="20" id="lrM-GG-g6J"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="p0P-v7-xpY"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="CTo-mq-5cB"/>
+                                <exclude reference="Msq-7k-Cic"/>
+                                <exclude reference="VqE-M5-elB"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="p0P-v7-xpY"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="CTo-mq-5cB"/>
+                                <include reference="Msq-7k-Cic"/>
+                                <include reference="VqE-M5-elB"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="iLg-j9-fgu" id="7O3-8V-w3I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hjz-Hg-i2O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="922.5" y="-26.25"/>
         </scene>
         <!--History View Controller-->
         <scene sceneID="geV-Ee-IWg">
@@ -130,9 +172,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="3aD-LB-va5" secondAttribute="trailing" constant="28" id="JHe-Ve-cAL"/>
-                            <constraint firstItem="3aD-LB-va5" firstAttribute="leading" secondItem="eNL-Cp-296" secondAttribute="leading" constant="28" id="Mca-wy-QP0"/>
-                            <constraint firstItem="3aD-LB-va5" firstAttribute="top" secondItem="eNL-Cp-296" secondAttribute="top" constant="40" id="jar-o0-Bf5"/>
+                            <constraint firstAttribute="trailing" secondItem="3aD-LB-va5" secondAttribute="trailing" constant="28" id="JHe-Ve-cAL">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="3aD-LB-va5" firstAttribute="leading" secondItem="eNL-Cp-296" secondAttribute="leading" constant="28" id="Mca-wy-QP0">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="3aD-LB-va5" firstAttribute="top" secondItem="eNL-Cp-296" secondAttribute="top" constant="40" id="jar-o0-Bf5">
+                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                            </constraint>
                         </constraints>
                     </view>
                 </viewController>
@@ -160,9 +208,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="GdT-gI-aio" secondAttribute="trailing" constant="28" id="1co-Zo-fjf"/>
-                            <constraint firstItem="GdT-gI-aio" firstAttribute="top" secondItem="def-dN-9kv" secondAttribute="top" constant="40" id="LaI-3y-gyf"/>
-                            <constraint firstItem="GdT-gI-aio" firstAttribute="leading" secondItem="def-dN-9kv" secondAttribute="leading" constant="28" id="LaR-Rj-PsE"/>
+                            <constraint firstAttribute="trailing" secondItem="GdT-gI-aio" secondAttribute="trailing" constant="28" id="1co-Zo-fjf">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="GdT-gI-aio" firstAttribute="top" secondItem="def-dN-9kv" secondAttribute="top" constant="40" id="LaI-3y-gyf">
+                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="GdT-gI-aio" firstAttribute="leading" secondItem="def-dN-9kv" secondAttribute="leading" constant="28" id="LaR-Rj-PsE">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
                         </constraints>
                     </view>
                 </viewController>

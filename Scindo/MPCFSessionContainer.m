@@ -7,6 +7,7 @@
 //
 
 #import "MPCFSessionContainer.h"
+#import "AppDelegate.h"
 
 @implementation MPCFSessionContainer
 
@@ -20,30 +21,27 @@
     return self;
 }
 
-- (void)setupPeerAndSessionWithDisplayName:(NSString *)displayName {
+- (void)initWithDisplayName:(NSString *)displayName {
+    // Create multipeer connection session
     _id = [[MCPeerID alloc] initWithDisplayName:displayName];
-    
     _session = [[MCSession alloc] initWithPeer:_id];
     _session.delegate = self;
+    
+    // Setup advertiser
+    self.advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_id
+                                                        discoveryInfo:nil
+                                                          serviceType:@"scindo"];
+    // Setup browser
+    self.browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_id
+                                                    serviceType:@"scindo"];
 }
 
-- (void)setupMPCFBrowser {
-    // TODO - Create custom view for auto-accepting invites invisibly
-    _browser = [[MCBrowserViewController alloc] initWithServiceType:@"scindo"
-                                                               session:_session];
+- (void)advertise:(BOOL)shouldAdvertise {
+    shouldAdvertise ? [_advertiser startAdvertisingPeer] : [_advertiser stopAdvertisingPeer];
 }
 
-- (void)advertiseSelf:(BOOL)shouldAdvertise {
-    if (shouldAdvertise) {
-        _advertiser = [[MCAdvertiserAssistant alloc] initWithServiceType:@"scindo"
-                                                           discoveryInfo:nil
-                                                                 session:_session];
-        [_advertiser start];
-    }
-    else {
-        [_advertiser stop];
-        _advertiser = nil;
-    }
+- (void)browse:(BOOL)shouldBrowse {
+    shouldBrowse ? [_browser startBrowsingForPeers] : [_browser stopBrowsingForPeers];
 }
 
 #pragma mark - MCSessionDelegate
@@ -61,13 +59,11 @@ didChangeState:(MCSessionState)state {
                                                       userInfo:dict];
 }
 
-
 -(void)session:(MCSession *)session
 didReceiveData:(NSData *)data
       fromPeer:(MCPeerID *)peerID {
-    
-}
 
+}
 
 -(void)session:(MCSession *)session
 didStartReceivingResourceWithName:(NSString *)resourceName
@@ -76,7 +72,6 @@ didStartReceivingResourceWithName:(NSString *)resourceName
     
 }
 
-
 -(void)session:(MCSession *)session
 didFinishReceivingResourceWithName:(NSString *)resourceName
       fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL
@@ -84,11 +79,42 @@ didFinishReceivingResourceWithName:(NSString *)resourceName
     
 }
 
-
 -(void)session:(MCSession *)session
 didReceiveStream:(NSInputStream *)stream
       withName:(NSString *)streamName
       fromPeer:(MCPeerID *)peerID {
+    
+}
+
+#pragma mark - MCNearbyServiceBrowserDelegate
+
+- (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info {
+    
+    // Auto-invite any peers that are found
+    [_browser invitePeer:peerID
+               toSession:_session
+             withContext:nil
+                 timeout:5.0];
+}
+
+- (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID {
+    
+}
+
+- (void)browser:(MCNearbyServiceBrowser *)browser didNotStartBrowsingForPeers:(NSError *)error {
+    
+}
+
+#pragma mark - MCNearbyServiceAdvertiserDelegate methods
+
+- (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID
+       withContext:(NSData *)context invitationHandler:(void (^)(BOOL accept, MCSession *session))invitationHandler {
+    
+    // Auto-accept any invitations received
+    invitationHandler(YES, _session);
+}
+
+- (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didNotStartAdvertisingPeer:(NSError *)error {
     
 }
 

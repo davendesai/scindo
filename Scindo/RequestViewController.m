@@ -1,18 +1,20 @@
 //
-//  LandingViewController.m
+//  RequestViewController.m
 //  Scindo
 //
 //  Created by Daven Desai on 12/14/14.
 //
 //
 
-#import "HistoryViewController.h"
+#import "RequestViewController.h"
+#import "AppDelegate.h"
 
-@interface HistoryViewController ()
+
+@interface RequestViewController ()
 
 @end
 
-@implementation HistoryViewController
+@implementation RequestViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,5 +35,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - IBActions
+
+- (IBAction)close:(id)sender {
+    // TODO - Cancel gracefully, right now just close everything
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

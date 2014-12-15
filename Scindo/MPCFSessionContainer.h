@@ -9,17 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <MultipeerConnectivity/MultipeerConnectivity.h>
 
-@interface MPCFSessionContainer : NSObject <MCSessionDelegate>
+@interface MPCFSessionContainer : NSObject <MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate>
 
 @property (nonatomic, strong) MCPeerID *id;
 @property (nonatomic, strong) MCSession *session;
-@property (nonatomic, strong) MCBrowserViewController *browser;
-@property (nonatomic, strong) MCAdvertiserAssistant *advertiser;
+
+@property (nonatomic, strong) MCNearbyServiceBrowser *browser;
+@property (nonatomic, strong) MCNearbyServiceAdvertiser *advertiser;
 
 #pragma mark - MPCFSessionDelegate
 
-- (void)setupPeerAndSessionWithDisplayName:(NSString *)displayName;
-- (void)setupMPCFBrowser;
-- (void)advertiseSelf:(BOOL)shouldAdvertise;
+- (void)initWithDisplayName:(NSString *)displayName;
+
+- (void)advertise:(BOOL)shouldAdvertise;
+- (void)browse:(BOOL)shouldBrowse;
 
 @end

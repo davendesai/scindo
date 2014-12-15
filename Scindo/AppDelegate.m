@@ -6,8 +6,8 @@
 //
 //
 
+#import <MultipeerConnectivity/MultipeerConnectivity.h>
 #import "AppDelegate.h"
-#import "MPCFSessionContainer.h"
 
 @interface AppDelegate ()
 
@@ -18,61 +18,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // Allocate Multipeer Connectivity Framework session at load
-    _mpcfSessionContainer = [[MPCFSessionContainer alloc] init];
-    
-    // Start advertising
-    [_mpcfSessionContainer setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
-    [_mpcfSessionContainer advertiseSelf:YES];
-    
-    ///////////////////////////////////////////////////////
-    /**
-     *  TESTING
-     *
-     *  Create and dispath methods for testing MPCF methods via GCD simulating differing wait times
-     *  for clients that appear/disappear.
-     *
-     */////////////////////////////////////////////////////
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        sleep(1);  // simulating a thread being tied up for 1 seconds
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *dict = @{@"peerID":[[MCPeerID alloc] initWithDisplayName:@"Test's iPhone"],
-                                   @"state" :[[NSNumber alloc] initWithInt:MCSessionStateConnected]};
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
-                                                                object:nil
-                                                              userInfo:dict];
-        });
-    });
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        sleep(3);  // simulating a thread being tied up for 3 seconds
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *dict = @{@"peerID":[[MCPeerID alloc] initWithDisplayName:@"Another Test's iPhone"],
-                                   @"state" :[[NSNumber alloc] initWithInt:MCSessionStateConnected]};
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
-                                                                object:nil
-                                                              userInfo:dict];
-        });
-    });
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        sleep(7);  // simulating a thread being tied up for 7 seconds
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *dict = @{@"peerID":[[MCPeerID alloc] initWithDisplayName:@"Yet Another Test's iPhone"],
-                                   @"state" :[[NSNumber alloc] initWithInt:MCSessionStateConnected]};
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
-                                                                object:nil
-                                                              userInfo:dict];
-        });
-    });
-    
     return YES;
 }
+
+#pragma mark - UIApplicationDelegate
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
