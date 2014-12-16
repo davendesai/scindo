@@ -24,4 +24,6 @@
 - (void)advertise:(BOOL)shouldAdvertise;
 - (void)browse:(BOOL)shouldBrowse;
 
+- (BOOL)sendStartTransactionNotificationToPeers:(NSArray *)peers;
+
 @end

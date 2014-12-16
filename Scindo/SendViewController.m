@@ -7,11 +7,8 @@
 //
 
 #import "SendViewController.h"
-#import "TransactionContainer.h"
 
 @interface SendViewController ()
-
-@property (nonatomic, strong) TransactionContainer *transactionContainer;
 
 @end
 
@@ -20,9 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    // Allocate Transaction at load
-    _transactionContainer = [[TransactionContainer alloc] init];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,8 +37,17 @@
 
 #pragma mark - IBActions
 
+- (IBAction)send:(id)sender {
+    // Notify delegate that we are done
+    [self.delegate finishedSendView];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)close:(id)sender {
-    // TODO - Cancel gracefully, right now just close everything
+    // Notify delegate that we are done
+    [self.delegate closedSendView];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

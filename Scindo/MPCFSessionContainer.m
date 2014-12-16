@@ -43,6 +43,17 @@
     shouldBrowse ? [_browser startBrowsingForPeers] : [_browser stopBrowsingForPeers];
 }
 
+- (BOOL)sendStartTransactionNotificationToPeers:(NSArray *)peers {
+    // Send start command to specified peers
+    NSDictionary *dict = @{@"command" : @"start"};
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
+    
+    return [_session sendData:data
+                      toPeers:peers
+                     withMode:MCSessionSendDataReliable
+                        error:nil];
+}
+
 #pragma mark - MCSessionDelegate
 
 // TODO - Don't have to worry about this until I have actual test devices
@@ -51,10 +62,11 @@
           peer:(MCPeerID *)peerID
 didChangeState:(MCSessionState)state {
     
-    // Foward state message to browser
-    NSDictionary *dict = @{@"peerID": peerID,
-                           @"state" : [NSNumber numberWithInt:state]};
+    // Create properly formed notification
+    NSDictionary *dict = @{@"origin" : peerID,
+                           @"state"  : [NSNumber numberWithInt:state]};
     
+    // Send peer information to host
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
                                                         object:nil
                                                       userInfo:dict];
@@ -65,37 +77,34 @@ didReceiveData:(NSData *)data
       fromPeer:(MCPeerID *)peerID {
     
     // TODO - Make sure you encode the same way when sending data
-    NSDictionary *subdata = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSDictionary *receivedDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSString *command = [receivedDict valueForKey:@"command"];
     
-    if ([[subdata valueForKey:@"command"] isEqualToString:@"start"]) {
-        
-        NSDictionary *dict = @{@"peerID": peerID,
-                               @"data"  : [subdata valueForKey:@"data"]};
-        
+    if ([command isEqualToString:@"start"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidStartTransactionNotification"
                                                             object:nil
-                                                          userInfo:dict];
+                                                          userInfo:@{@"origin" : peerID}];
     }
-}
-
--(void)session:(MCSession *)session
-didStartReceivingResourceWithName:(NSString *)resourceName
-      fromPeer:(MCPeerID *)peerID
-  withProgress:(NSProgress *)progress {
-    
-}
-
--(void)session:(MCSession *)session
-didFinishReceivingResourceWithName:(NSString *)resourceName
-      fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL
-     withError:(NSError *)error {
-    
 }
 
 -(void)session:(MCSession *)session
 didReceiveStream:(NSInputStream *)stream
       withName:(NSString *)streamName
       fromPeer:(MCPeerID *)peerID {
+    
+}
+
+- (void)session:(MCSession *)session
+didStartReceivingResourceWithName:(NSString *)resourceName
+       fromPeer:(MCPeerID *)peerID
+   withProgress:(NSProgress *)progress {
+    
+}
+
+- (void)session:(MCSession *)session
+didFinishReceivingResourceWithName:(NSString *)resourceName
+       fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL
+      withError:(NSError *)error {
     
 }
 
@@ -111,14 +120,7 @@ didReceiveStream:(NSInputStream *)stream
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID {
-    
-    // Simulate peer cancelling connection normally
-    NSDictionary *dict = @{@"peerID": peerID,
-                           @"state" : [NSNumber numberWithInt:MCSessionStateNotConnected]};
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
-                                                        object:nil
-                                                      userInfo:dict];
+    // SHOULD NEVER HAVE TO DO THIS
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser didNotStartBrowsingForPeers:(NSError *)error {

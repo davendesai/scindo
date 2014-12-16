@@ -9,7 +9,7 @@
 #import <MultipeerConnectivity/MultipeerConnectivity.h>
 
 #import "RequestViewController.h"
-
+#import "RequestViewCell.h"
 
 @interface RequestViewController ()
 
@@ -42,12 +42,15 @@
 #pragma mark - IBActions
 
 - (IBAction)transact:(id)sender {
-    // TODO - Cancel gracefully, right now just close everything
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+    // Notify delegate that we are done
+    [self.delegate finishedRequestView];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];}
 
 - (IBAction)close:(id)sender {
-    // TODO - Cancel gracefully, right now just close everything
+    // Notify delegate that we are done
+    [self.delegate closedRequestView];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -57,21 +60,27 @@
     return [_arrParticipants count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    RequestViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"participantCell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+        cell = [[RequestViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"participantCell"];
     }
     
-    MCPeerID *id = [_arrParticipants objectAtIndex:indexPath.row];
-    NSString *output = id.displayName;
-    
-    // TODO - Add more information to transaction participants
-    [output stringByAppendingString:@" has pledged $0"];
-    
-    cell.textLabel.text = output;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(RequestViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // Update information for each custom cell
+    MCPeerID *id = [_arrParticipants objectAtIndex:indexPath.row];
+    NSString *name = id.displayName;
+    
+    [cell.lblName setText:name];
+    [cell.lblAmount setText:@"$0"];
 }
 
 @end

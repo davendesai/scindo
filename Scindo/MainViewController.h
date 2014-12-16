@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RequestViewController.h"
+#import "SendViewController.h"
 
-@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MainViewController : UIViewController <RequestViewDelegate, SendViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tblConnected;
 @property (nonatomic, weak) IBOutlet UIButton *btnStartTransaction;

@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view.
     
     // TODO - Replace later with items from plist
-    _pageIDs = @[@"SettingsView", @"LandingView", @"TransactionsView"];
+    _pageIDs = @[@"SettingsView", @"MainView", @"TransactionsView"];
     _viewControllers = @[[self.storyboard instantiateViewControllerWithIdentifier:[_pageIDs objectAtIndex:0]],
                          [self.storyboard instantiateViewControllerWithIdentifier:[_pageIDs objectAtIndex:1]],
                          [self.storyboard instantiateViewControllerWithIdentifier:[_pageIDs objectAtIndex:2]]];
