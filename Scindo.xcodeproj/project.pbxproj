@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13028D8E1A40245E00EABD87 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13028D8D1A40245E00EABD87 /* SendViewController.m */; };
 		1303EAC91A3D939C0022BF86 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1303EAC81A3D939C0022BF86 /* HistoryViewController.m */; };
 		1303EAD61A3D975D0022BF86 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1303EAD51A3D975D0022BF86 /* SettingsViewController.m */; };
 		13200EB21A3E2B850062E598 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13200EB11A3E2B850062E598 /* RequestViewController.m */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13028D8C1A40245E00EABD87 /* SendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendViewController.h; sourceTree = "<group>"; };
+		13028D8D1A40245E00EABD87 /* SendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendViewController.m; sourceTree = "<group>"; };
 		1303EAC71A3D939C0022BF86 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		1303EAC81A3D939C0022BF86 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		1303EAD41A3D975D0022BF86 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -104,6 +107,8 @@
 			children = (
 				13200EB01A3E2B850062E598 /* RequestViewController.h */,
 				13200EB11A3E2B850062E598 /* RequestViewController.m */,
+				13028D8C1A40245E00EABD87 /* SendViewController.h */,
+				13028D8D1A40245E00EABD87 /* SendViewController.m */,
 			);
 			name = modal;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 				13E131F21A3C83C200F8EA9F /* MPCFSessionContainer.m in Sources */,
 				135B27681A3DA30F007D16D0 /* BackgroundController.m in Sources */,
 				1303EAC91A3D939C0022BF86 /* HistoryViewController.m in Sources */,
+				13028D8E1A40245E00EABD87 /* SendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

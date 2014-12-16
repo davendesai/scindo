@@ -7,7 +7,6 @@
 //
 
 #import "MPCFSessionContainer.h"
-#import "AppDelegate.h"
 
 @implementation MPCFSessionContainer
 
@@ -51,6 +50,8 @@
 -(void)session:(MCSession *)session
           peer:(MCPeerID *)peerID
 didChangeState:(MCSessionState)state {
+    
+    // Foward state message to browser
     NSDictionary *dict = @{@"peerID": peerID,
                            @"state" : [NSNumber numberWithInt:state]};
     
@@ -62,7 +63,19 @@ didChangeState:(MCSessionState)state {
 -(void)session:(MCSession *)session
 didReceiveData:(NSData *)data
       fromPeer:(MCPeerID *)peerID {
-
+    
+    // TODO - Make sure you encode the same way when sending data
+    NSDictionary *subdata = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    if ([[subdata valueForKey:@"command"] isEqualToString:@"start"]) {
+        
+        NSDictionary *dict = @{@"peerID": peerID,
+                               @"data"  : [subdata valueForKey:@"data"]};
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidStartTransactionNotification"
+                                                            object:nil
+                                                          userInfo:dict];
+    }
 }
 
 -(void)session:(MCSession *)session
@@ -99,10 +112,17 @@ didReceiveStream:(NSInputStream *)stream
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID {
     
+    // Simulate peer cancelling connection normally
+    NSDictionary *dict = @{@"peerID": peerID,
+                           @"state" : [NSNumber numberWithInt:MCSessionStateNotConnected]};
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCFDidChangeStateNotification"
+                                                        object:nil
+                                                      userInfo:dict];
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser didNotStartBrowsingForPeers:(NSError *)error {
-    
+    // SHOULD NEVER HAVE TO DO THIS
 }
 
 #pragma mark - MCNearbyServiceAdvertiserDelegate methods
@@ -115,7 +135,7 @@ didReceiveStream:(NSInputStream *)stream
 }
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didNotStartAdvertisingPeer:(NSError *)error {
-    
+    // SHOULD NEVER HAVE TO DO THIS
 }
 
 @end

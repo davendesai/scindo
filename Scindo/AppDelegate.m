@@ -6,7 +6,6 @@
 //
 //
 
-#import <MultipeerConnectivity/MultipeerConnectivity.h>
 #import "AppDelegate.h"
 
 @interface AppDelegate ()

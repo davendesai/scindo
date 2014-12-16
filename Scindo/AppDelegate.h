@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MPCFSessionContainer.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MultipeerConnectivity/MultipeerConnectivity.h>
 
 @interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -17,5 +16,6 @@
 #pragma mark - Notifications
 
 - (void)peerDidChangeStateWithNotification:(NSNotification *)notification;
+- (void)peerDidStartTransactionWithNotification:(NSNotification *)notification;
 
 @end

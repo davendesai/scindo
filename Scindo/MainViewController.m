@@ -6,9 +6,13 @@
 //
 //
 
+#import <MultipeerConnectivity/MultipeerConnectivity.h>
+
 #import "MPCFSessionContainer.h"
 #import "MainViewController.h"
+
 #import "RequestViewController.h"
+#import "SendViewController.h"
 
 @interface MainViewController ()
 
@@ -42,6 +46,11 @@
                                              selector:@selector(peerDidChangeStateWithNotification:)
                                                  name:@"MPCFDidChangeStateNotification"
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(peerDidStartTransactionWithNotification:)
+                                                 name:@"MPCFDidStartTransactionNotification"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +63,37 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    // Get involved peers
+    NSMutableArray *selected = [[NSMutableArray alloc] init];
+    for (NSIndexPath *index in _tblConnected.indexPathsForSelectedRows) {
+        MCPeerID *selectedPeer = [[_mpcfSessionContainer.session connectedPeers] objectAtIndex:index.row];
+        [selected addObject:selectedPeer];
+    }
 
+    // For request view
+    if ([[segue identifier] isEqualToString:@"RequestSegue"]) {
+        RequestViewController *reqViewController = (RequestViewController *)segue.destinationViewController;
+        reqViewController.arrParticipants = [selected copy];
+        
+        // Send start transaction notification to all participants
+        NSDictionary *dict = @{@"command" : @"start"};
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
+        NSError *error = nil;
+        
+        // TODO - Abstact out into MPCFSessionContainer
+        if (![_mpcfSessionContainer.session sendData:data
+                                             toPeers:selected
+                                            withMode:MCSessionSendDataReliable
+                                               error:&error]) {
+            NSLog(@"[Error] (Should be OK in production) %@", error);
+        }
+    }
+    // For send view
+    else if ([[segue identifier] isEqualToString:@"SendSegue"]) {
+        SendViewController *sendViewController = (SendViewController *)segue.destinationViewController;
+        sendViewController.arrParticipants = [selected copy];
+    }
 }
 
 #pragma mark - Notifications
@@ -64,6 +103,11 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [_tblConnected reloadData];
     });
+}
+
+- (void)peerDidStartTransactionWithNotification:(NSNotification *)notification {
+    // TODO - Do different things based on kind of data received
+    [self performSegueWithIdentifier:@"SendSegue" sender:self];
 }
 
 #pragma mark - UITableViewDataSource
@@ -76,7 +120,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
     
     MCPeerID *id = [[_mpcfSessionContainer.session connectedPeers] objectAtIndex:indexPath.row];
